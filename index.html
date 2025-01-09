@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio - Showcasing projects, experience, and contact information">
+    <title>My Portfolio - Celia Kamana</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    
+    <style>
+        /* General Reset */
+        body, h1, h2, h3, p, a, ul, li, input, textarea, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            scroll-behavior: smooth;
+        }
+
+        body.dark-mode {
+            background-color: #1e1e2f;
+            color: #e4e4e4;
+        }
+
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode p {
+            color: #ffffff;
+        }
+
+        .dark-mode .navbar {
+            background: #001a33;
+        }
+
+        .dark-mode .navbar.scrolled {
+            background: #1a1a2e;
+        }
+
+        .dark-mode .home {
+            background: #001a33;
+        }
+
+        .dark-mode .about {
+            background: #1a1a2e
+        }
+
+        .dark-mode .projects {
+            background: #2c2c3c;
+        }
+
+        .dark-mode .contact {
+            background: #001a33;
+        }
+
+        .dark-mode .project-card {
+            background: #3c3c4c;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #00274d;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: #eaecec;
+            color:#00274d;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: #00274d;
+        }
+
+        .navbar.scrolled .dark-mode-toggle {
+            color: #00274d;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+            margin-left: auto;
+            margin-right: 4rem;
+        }
+
+        .navbar .nav-links li {
+            font-size: 1.5rem;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+    
+       .dark-mode-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-right: 5rem;
+        }
+
+        body.dark-mode .navbar .nav-links a,
+        body.dark-mode .dark-mode-toggle {
+            color: #fff;
+        }
+
+        /* Home Section */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 2rem;
+            background: #00274d;
+            color: #fff;
+            height: 100vh;
+        }
+
+        .home .intro {
+            max-width: 50%;
+        }
+
+        .home .intro p {
+            font-size: 1.5rem;
+            font-weight: lighter;
+            margin-bottom: 1rem;
+        }
+
+        .home .intro h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .home .image {
+            max-width: 40%;
+            text-align: right;
+        }
+
+        .home .image img {
+            max-width: 100%;
+            height: auto;
+        }
+/* About Section */
+.about {
+            padding: 4rem 2rem;
+            background: #fff;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .about.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about h1{
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #00274d;
+            font-size: 1.5rem;
+            padding: 1rem 1rem;
+        }
+
+        .about .content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            color: #141414;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding:4rem 2rem;
+            background: #add1f1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .projects.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .projects h1{
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #00274d;
+            padding: 1rem 1rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            Padding:2rem;
+        }
+
+        .project-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            color: #00509e;
+        }
+
+        .project-card .btn {
+            background: #00509e;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 4rem 2rem;
+            background: #00274d;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .contact.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .contact button {
+            background: #00509e;
+            color: #fff;                    
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Footer */
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Experience/Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="intro">
+            <p>Hi! My name is</p>
+            <h1>Celia Kamana</h1>
+            <p class="subtitle">Project Manager & Software/Web Developer</p>
+        </div>
+        <div class="image">
+            <img src="img/imgPrfl.jpg" alt="Profile Image">
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h1>ABOUT ME<h1>
+            <div class="content">
+                <p>To work on.</p>
+                <p>bla balaa strong foundation in project management and web development, I bring innovative solutions to complex problems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience/Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h1>Experience & Projects</h1>
+            <div class="project-grid">
+                <!-- Repeatable Project Cards -->
+                <div class="project-card">
+                    <h3>Project Title</h3>
+                    <p>Lorem ipsum lldm...</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="project-card">
+                    <h3>Project Title</h3>
+                    <p>Lorem ipsum lldm...</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="project-grid">
+                 <div class="project-card">
+                    <h3>Project Title</h3>
+                    <p>Lorem ipsum lldm...</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="project-card">
+                    <h3>Project Title</h3>
+                    <p>Lorem ipsum lldm...</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>If you'd like to work together, feel free to reach out!</p>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Celia Kamana. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+
+            const darkModeToggle = document.querySelector('.dark-mode-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                darkModeToggle.classList.remove('fa-moon');
+                darkModeToggle.classList.add('fa-sun');
+            } else {
+                darkModeToggle.classList.remove('fa-sun');
+                darkModeToggle.classList.add('fa-moon');
+            }
+        }
+
+        // Smooth scrolling and fade-in animations
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+
+            // Navbar background change on scroll
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
